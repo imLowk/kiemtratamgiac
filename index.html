@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Kiểm Tra Tam Giác</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+      .container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+      label {
+        display: block;
+        margin-bottom: 10px;
+      }
+      input[type="number"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 16px;
+      }
+      button {
+        background-color: #4caf50;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        margin-top: 10px;
+      }
+      button:hover {
+        background-color: #3e8e41;
+      }
+      .result {
+        margin-top: 20px;
+        padding: 10px;
+        border-radius: 5px;
+        font-size: 16px;
+        background-color: #f2f2f2;
+      }
+      .result p {
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Nhập vào 3 ô bên dưới các cạnh của tam giác muốn kiểm tra</h1>
+      <form>
+        <label for="side1">Cạnh 1:</label>
+        <input
+          type="number"
+          id="side1"
+          name="side1"
+          placeholder="Nhập vào độ dài cạnh 1"
+        />
+
+        <label for="side2">Cạnh 2:</label>
+        <input
+          type="number"
+          id="side2"
+          name="side2"
+          placeholder="Nhập vào độ dài cạnh 2"
+        />
+
+        <label for="side3">Cạnh 3:</label>
+        <input
+          type="number"
+          id="side3"
+          name="side3"
+          placeholder="Nhập vào độ dài cạnh 3"
+        />
+
+        <button type="button" onclick="checkTriangle()">Kiểm tra</button>
+      </form>
+
+      <div class="result" id="result"></div>
+    </div>
+
+    <script>
+      function checkTriangle() {
+        const side1 = parseFloat(document.getElementById("side1").value);
+        const side2 = parseFloat(document.getElementById("side2").value);
+        const side3 = parseFloat(document.getElementById("side3").value);
+
+        if (isNaN(side1) || isNaN(side2) || isNaN(side3)) {
+          document.getElementById("result").innerHTML =
+            "<p>Nhập vào giá trị là số thực ở cả 3 ô.</p>";
+        } else if (side1 <= 0 || side2 <= 0 || side3 <= 0) {
+          document.getElementById("result").innerHTML =
+            "<p>Số nhập vào phải lớn hơn 0</p>";
+        } else if (
+          side1 + side2 <= side3 ||
+          side2 + side3 <= side1 ||
+          side1 + side3 <= side2
+        ) {
+          document.getElementById("result").innerHTML =
+            "<p>Các độ dài này không tạo thành một tam giác, Ba cạnh của một tam giác phải thỏa mãn điều kiện là tổng hai cạnh bất kỳ luôn lớn hơn cạnh còn lại. </p>";
+        } else if (side1 === side2 && side2 === side3) {
+          document.getElementById("result").innerHTML =
+            "<p>Đây là tam giác đều</p>";
+        } else if (side1 === side2 || side1 === side3 || side2 === side3) {
+          document.getElementById("result").innerHTML =
+            "<p>Đây là tam giác cân</p>";
+        } else if (
+          side1 ** 2 + side2 ** 2 == side3 ** 2 ||
+          side1 ** 2 + side3 ** 2 == side2 ** 2 ||
+          side1 ** 2 == side2 ** 2 + side3 ** 2
+        ) {
+          document.getElementById("result").innerHTML =
+            "<p>Đây là tam giác vuông</p>";
+        } else if (
+          side1 ** 2 + side2 ** 2 < side3 ** 2 ||
+          side1 ** 2 + side3 ** 2 < side2 ** 2 ||
+          side1 ** 2 > side2 ** 2 + side3 ** 2
+        ) {
+          document.getElementById("result").innerHTML =
+            "<p>Đây là tam giác tù</p>";
+        } else {
+          document.getElementById("result").innerHTML =
+            "<p>Đây là tam giác thường (tam giác nhọn)</p>";
+        }
+      }
+    </script>
+  </body>
+</html>
